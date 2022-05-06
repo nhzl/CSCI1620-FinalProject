@@ -8,7 +8,7 @@ class Controller(QMainWindow, Ui_Dialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
-        self.pushButton.clicked.connect(lambda: self.indeed())
+        self.pushButton.clicked.connect(lambda: self.indeed(self))
 
     def indeed(self):
         search_term = self.searchBox.text()
