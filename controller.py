@@ -8,7 +8,7 @@ class Controller(QMainWindow, Ui_Dialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
-        self.save_button.clicked.connect(lambda: self.save())
+        self.pushButton.clicked.connect(lambda: self.indeed())
 
     def indeed(self):
         search_term = self.searchBox.text()
@@ -38,4 +38,3 @@ class Controller(QMainWindow, Ui_Dialog):
         Urgently Hiring: {urgent}
         ''')
 
-    indeed()
