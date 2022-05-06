@@ -1,19 +1,18 @@
 from bs4 import BeautifulSoup
 from gui import Ui_Dialog
 import requests
-from csv import writer
+from PyQt5.QtWidgets import *
 
 
-
-class Controller(QMainWindow, Ui_MainWindow):
+class Controller(QMainWindow, Ui_Dialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
         self.save_button.clicked.connect(lambda: self.save())
 
     def indeed(self):
-        search_term = input("Enter search term")
-        location_term = input("Enter location: ")
+        search_term = self.searchBox.text()
+        location_term = self.searchBox_2.text()
 
         url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l=' + location_term + '%2C%20NE&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=ae9008d2f6729286'
 
@@ -38,16 +37,5 @@ class Controller(QMainWindow, Ui_MainWindow):
         Job Title: {title}
         Urgently Hiring: {urgent}
         ''')
-te
 
     indeed()
-
-    # save_option = input("Save Results to .CSV file?(Y/N):").lower()
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
