@@ -32,29 +32,17 @@ class Controller(QMainWindow, Ui_MainWindow):
         else:
             urgent = 'Yes.'
 
-        for i in range(0, 50):
-
-            print(f'''
-            Company Name: {company_name}
-            Location: {location}
-            Job Title: {title}
-            Urgently Hiring: {urgent}
-            ''')
-
+        print(f'''
+        Company Name: {company_name}
+        Location: {location}
+        Job Title: {title}
+        Urgently Hiring: {urgent}
+        ''')
+te
 
     indeed()
 
     # save_option = input("Save Results to .CSV file?(Y/N):").lower()
-
-    if save_option.lower() == 'y':
-        with open("records.csv", "a", newline='') as csv_file:
-            csv_reader = writer(csv_file)
-            csv_reader.writerow(job_total)
-            csv_file.close()
-    elif save_option.lower() == 'n':
-        print("Done")
-    else:
-        print("Error")
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
