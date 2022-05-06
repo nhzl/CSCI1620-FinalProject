@@ -8,11 +8,18 @@ class Controller(QMainWindow, Ui_Dialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
-        self.pushButton.clicked.connect(lambda: self.indeed(self))
+        self.pushButton.clicked.connect(lambda: self.indeed())
+        self.resetButton.clicked.connect(lambda: self.reset())
+
+
 
     def indeed(self):
-        search_term = self.searchBox.text()
-        location_term = self.searchBox_2.text()
+        search_term = self.searchBox.toPlainText()
+        location_term = self.searchBox_2.toPlainText()
+        self.listWidget.addItem(location_term)
+
+
+
 
         url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st' \
                                                                     '&salary&radius=25&l=' + location_term + \
@@ -36,10 +43,8 @@ class Controller(QMainWindow, Ui_Dialog):
 
         self.listWidget.addItem(f"{company_name} {location} {title} {urgent}")
 
-        print(f'''
-        Company Name: {company_name}
-        Location: {location}
-        Job Title: {title}
-        Urgently Hiring: {urgent}
-        ''')
+    def reset(self):
+        self.listWidget.addItem("hello world")
+
+
 
