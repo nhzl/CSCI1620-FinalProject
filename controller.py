@@ -1,12 +1,17 @@
 from bs4 import BeautifulSoup
-from gui import Ui_MainWindow
+from gui import Ui_Dialog
 import requests
 from csv import writer
 
 
 
-class Controller(QMainWindow, Ui_MainWindow)
-    def indeed():
+class Controller(QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setupUi(self)
+        self.save_button.clicked.connect(lambda: self.save())
+
+    def indeed(self):
         search_term = input("Enter search term")
         location_term = input("Enter location: ")
 
@@ -50,3 +55,11 @@ class Controller(QMainWindow, Ui_MainWindow)
         print("Done")
     else:
         print("Error")
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
