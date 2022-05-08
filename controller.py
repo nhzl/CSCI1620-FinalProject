@@ -1,50 +1,28 @@
 from bs4 import BeautifulSoup
-from gui import Ui_Dialog
+from view import Ui_MainWindow
+import lxml
 import requests
 from PyQt5.QtWidgets import *
 
 
-class Controller(QMainWindow, Ui_Dialog):
+class Controller(QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
         self.pushButton.clicked.connect(lambda: self.indeed())
         self.resetButton.clicked.connect(lambda: self.reset())
 
-
-
     def indeed(self):
-        search_term = self.searchBox.toPlainText()
-        location_term = self.searchBox_2.toPlainText()
-        self.listWidget.addItem(location_term)
-
-
-
-
-        url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st' \
-                                                                    '&salary&radius=25&l=' + location_term + \
-              '%2C%20NE&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=ae9008d2f6729286 '
-
-        page = requests.get(url).text
-
-        soup = BeautifulSoup(page, 'lxml')
+        search_term = 'software'  # self.searchBox.toPlainText()
+        location_term = 'omaha'  # self.searchBox_2.toPlainText()
+        url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l=' + location_term + '%2C%20NE&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=ae9008d2f6729286'
+        page = requests.get(url)
+        soup = BeautifulSoup(page.text, 'html.parser')
         job = soup.find('div', class_='slider_item')
 
-        company_name = job.find('span', class_='companyName').text.replace(' ', '')
-        location = job.find('div', class_='companyLocation').text
-        title = job.find('h2', class_='jobTitle').text
-        urgent = job.find('div', class_='urgentlyHiring')
+        #company_name = job.find('span', class_='companyName').text.replace(' ', '')
 
-        if urgent == 'None':
-            urgent = 'No'
-        else:
-            urgent = 'Yes.'
-        i = 0
-
-        self.listWidget.addItem(f"{company_name} {location} {title} {urgent}")
+        self.listWidget.addItem(job)
 
     def reset(self):
         self.listWidget.addItem("hello world")
-
-
-
