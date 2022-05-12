@@ -16,16 +16,24 @@ class Controller(QMainWindow, Ui_MainWindow):
 
     def indeed(self):
         i= 0
-        for i in range(0,10):
-            search_term = self.searchBox.toPlainText()
-            location_term = self.searchBox_2.toPlainText()
-            url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l=' + location_term + '%2C%20NE&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=ae9008d2f6729286'
-            page = requests.get(url)
-            soup = BeautifulSoup(page.text, 'html.parser')
-            job_title = soup.find('h2', class_='jobTitle').text
-            #employer_name = soup.find('span', class_='companyName').text
-            #location = soup.find('div', class_='companyLocation').text
-            self.listWidget.addItem('#{}. {}'.format(i,job_title))
+        search_term = self.searchBox.toPlainText()
+        location_term = self.searchBox_2.toPlainText()
+        url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l=' + location_term + '%2C%20NE&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=ae9008d2f6729286'
+        result = requests.get(url)
+
+        soup = BeautifulSoup(result.text, 'html.parser')
+
+        job = soup.find_all('div', class_='slider_item')
+
+        #job_title = job.find('span', attrs={'title'})
+
+        #employer_name = job.find(text ='companyName')
+
+        #location = job.find(text ='companyLocation')
+
+        print(job[1].prettify())
+
+        #self.listWidget.addItem()
 
     #def linkedin(self):
         #url = 'https://www.linkedin.com/jobs/search/?geoId=100739428&keywords=' + search_term + '&location=' + location_term
