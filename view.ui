@@ -66,7 +66,7 @@
      <string>Contract</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="siteGlassdoor">
+   <widget class="QCheckBox" name="siteGlassdoor">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -92,7 +92,7 @@
      <string notr="true">background-color:rgb(255, 255, 255)</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="siteGoogle">
+   <widget class="QCheckBox" name="siteGoogle">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -183,7 +183,7 @@
      <string notr="true">background-color:rgb(255, 255, 255)</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="siteLinkedin">
+   <widget class="QCheckBox" name="siteLinkedin">
     <property name="geometry">
      <rect>
       <x>340</x>
@@ -235,7 +235,7 @@
      <string>Search for:</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="siteIndeed">
+   <widget class="QCheckBox" name="siteIndeed">
     <property name="geometry">
      <rect>
       <x>250</x>

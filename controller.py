@@ -11,11 +11,19 @@ class Controller(QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
-        self.pushButton.clicked.connect(lambda: self.linkedin())
+        self.pushButton.clicked.connect(lambda: self.search())
         self.resetButton.clicked.connect(lambda: self.reset())
 
+    def search(self):
+        if self.siteIndeed.isChecked():
+            self.indeed()
+        if self.siteLinkedin.isChecked():
+            self.linkedin()
+
+
+
     def indeed(self):
-        """i= 0
+        i= 0
         search_term = self.searchBox.toPlainText()
         location_term = self.searchBox_2.toPlainText()
         url = 'https://www.indeed.com/jobs?as_and=' + search_term + '&as_phr&as_any&as_not&as_ttl&as_cmp&jt=all&st&salary&radius=25&l=' + location_term + '%2C%20NE&fromage=any&limit=50&sort&psf=advsrch&from=advancedsearch&vjk=ae9008d2f6729286'
@@ -24,7 +32,7 @@ class Controller(QMainWindow, Ui_MainWindow):
         soup = BeautifulSoup(result.content, 'html.parser')
 
         jobCard = soup.find_all('div', class_='slider_item')
-        for i in range(0,10):
+        for i in range(0,3):
             jobName = soup.find_all('h2')[i].get_text()
             companyName = soup.find_all('span',class_= 'companyName')[i].get_text()
             companyLocation = soup.find_all('div',class_= 'companyLocation')[i].get_text()
@@ -68,7 +76,7 @@ class Controller(QMainWindow, Ui_MainWindow):
         soup = BeautifulSoup(result.content, 'html.parser')
 
         linkjobCard = soup.find_all('div', class_='base-search-card__info')
-        for i in range(0,10):
+        for i in range(0,3):
             linkjobName = soup.find_all('h3',class_='base-search-card__title')[i].text.rstrip().lstrip()
             linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
             linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[i].get_text().rstrip().lstrip()
