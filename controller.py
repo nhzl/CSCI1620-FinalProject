@@ -72,7 +72,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             linkjobName = soup.find_all('h3',class_='base-search-card__title')[i].text.rstrip().lstrip()
             linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
             linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[i].get_text().rstrip().lstrip()
-            linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
+            #linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
             if 'new' in linkjobName:
                 linkjobName = linkjobName.lstrip('new')
                 self.listWidget.addItem(linkjobName)
@@ -83,10 +83,10 @@ class Controller(QMainWindow, Ui_MainWindow):
                 self.listWidget.addItem(linkjobName)
             self.listWidget.addItem(linkcompanyName)
             self.listWidget.addItem(linkcompanyLocation)
-            if linksalary.isalpha():
-                self.listWidget.addItem(linksalary)
-            else:
-                continue
+            #if linksalary.isalpha():
+                #self.listWidget.addItem(linksalary)
+            #else:
+                #continue
             i += 1
         print(linkjobCard[1].prettify())
 
