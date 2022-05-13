@@ -87,9 +87,39 @@ class Controller(QMainWindow, Ui_MainWindow):
             i += 1
         #print(linkjobCard[1].prettify())
 
-        #def google(self):
-        #url = 'https://www.google.com/search?q=' + search_term + '&rlz=1C1CHBF_en&oq=google+job+s&aqs=chrome.1.69i57j0i433i512j0i512l5j0i10i512j0i512l2&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&sqi=2&ved=2ahUKEwjs1ZLLptH3AhWchP0HHcjsCNgQutcGKAF6BAggEAY&sxsrf=ALiCzsYk8LG6xYJPn7SALKDVStz4i5QVQg:1652060938618#fpstate=tldetail&htivrt=jobs&htichips=city:8WYPEnHkrIl-8kaKidp64Q%3D%3D&htischips=city;8WYPEnHkrIl-8kaKidp64Q%3D%3D:' + location_term +'&htidocid=LQQoNIk0r3cAAAAAAAAAAA%3D%3D'
-    def ziprecruiter(self):
+    def google(self):
+        i = 0
+        search_term = self.searchBox.toPlainText()
+        location_term = self.searchBox_2.toPlainText()
+        url = 'https://www.google.com/search?q='+search_term+'Engineering&rlz=1C1VDKB_enUS938US938&oq=google+j&aqs=chrome.1.69i57j0i131i433i512j0i433i512j0i512l2j69i60l3.4648j0j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwjHp7nU9dz3AhW-jYkEHaTJCnkQutcGKAF6BAgPEAY&sxsrf=ALiCzsbm4jNvYteKcsFsiric0JS-ecS5Pg:1652460121647#fpstate=tldetail&htivrt=jobs&htidocid=g07sW7zha5oAAAAAAAAAAA%3D%3D'
+        result = requests.get(url)
+        soup = BeautifulSoup(result.content, 'html.parser')
+        url = 'https://www.google.com/search?q='++search_term+'&rlz=1C1VDKB_enUS938US938&oq=google+j&aqs=chrome.1.69i57j0i131i433i512j0i433i512j0i512l2j69i60l3.4648j0j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwjHp7nU9dz3AhW - jYkEHaTJCnkQutcGKAF6BAgPEAY & sxsrf = ALiCzsbm4jNvYteKcsFsiric0JS - ecS5Pg:1652460121647  # fpstate=tldetail&htivrt=jobs&htichips=city:7fwMtciNk4cEtjeuT01CRg%3D%3D&htischips=city;7fwMtciNk4cEtjeuT01CRg%3D%3D:'+location_term+'_comma_%20NE&htidocid=f2bfksgiRnsAAAAAAAAAAA%3D%3D'
+        # linkjobCard = soup.find_all('div', class_='base-search-card__info')
+        for i in range(0, 3):
+            linkjobName = soup.find_all('h3', class_='base-search-card__title')[i].text.rstrip().lstrip()
+            linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
+            linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[
+                i].get_text().rstrip().lstrip()
+            # linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
+            if 'new' in linkjobName:
+                linkjobName = linkjobName.lstrip('new')
+                self.listWidget.addItem(linkjobName)
+            elif '*' in linkjobName:
+                linkjobName = linkjobName.rstrip()
+                self.listWidget.addItem(linkjobName)
+            else:
+                self.listWidget.addItem(linkjobName)
+            self.listWidget.addItem(linkcompanyName)
+            self.listWidget.addItem(linkcompanyLocation)
+            # if linksalary.isalpha():
+            # self.listWidget.addItem(linksalary)
+            # else:
+            # continue
+            i += 1
+        # print(linkjobCard[1].prettify())
+
+    """def ziprecruiter(self):
         i = 0
         search_term = self.searchBox.toPlainText()
         location_term = self.searchBox_2.toPlainText()
@@ -98,20 +128,13 @@ class Controller(QMainWindow, Ui_MainWindow):
 
         soup = BeautifulSoup(result.content, 'html.parser')
 
-        zipjobCard = soup.find_all('div', class_='job_content')
+        #zipjobCard = soup.find_all('div', class_='job_content')
         for i in range(0, 3):
-            zipjobName = soup.find_all('span', class_='just_job_title')[i].get_text()
+            zipjobName = soup.find_all('h2')[i].get_text()
             #linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
             #linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[i].get_text().rstrip().lstrip()
             #linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
-            if 'new' in zipjobName:
-                zipjobName = zipjobName.lstrip('new')
-                self.listWidget.addItem(zipjobName)
-            elif '*' in zipjobName:
-                zipjobName = zipjobName.rstrip()
-                self.listWidget.addItem(zipjobName)
-            else:
-                self.listWidget.addItem(zipjobName)
+            self.listWidget.addItem(zipjobName)
             #self.listWidget.addItem(linkcompanyName)
             #self.listWidget.addItem(linkcompanyLocation)
             #if linksalary.isalpha():
@@ -119,7 +142,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             #else:
             #continue
             i += 1
-        print(zipjobCard[1].prettify())
+        #print(zipjobCard[1].prettify())"""
 
 
 
