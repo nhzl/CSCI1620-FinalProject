@@ -19,8 +19,12 @@ class Controller(QMainWindow, Ui_MainWindow):
             self.indeed()
         if self.siteLinkedin.isChecked():
             self.linkedin()
-        if self.siteZiprecruiter.isChecked():
-            self.ziprecruiter()
+        #if self.siteZiprecruiter.isChecked():
+            #self.ziprecruiter()
+        if self.siteGoogle.isChecked():
+            self.simply()
+
+
 
 
 
@@ -87,37 +91,32 @@ class Controller(QMainWindow, Ui_MainWindow):
             i += 1
         #print(linkjobCard[1].prettify())
 
-    def google(self):
+    def simply(self):
         i = 0
         search_term = self.searchBox.toPlainText()
         location_term = self.searchBox_2.toPlainText()
-        url = 'https://www.google.com/search?q='+search_term+'Engineering&rlz=1C1VDKB_enUS938US938&oq=google+j&aqs=chrome.1.69i57j0i131i433i512j0i433i512j0i512l2j69i60l3.4648j0j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwjHp7nU9dz3AhW-jYkEHaTJCnkQutcGKAF6BAgPEAY&sxsrf=ALiCzsbm4jNvYteKcsFsiric0JS-ecS5Pg:1652460121647#fpstate=tldetail&htivrt=jobs&htidocid=g07sW7zha5oAAAAAAAAAAA%3D%3D'
+        url = 'https://www.simplyhired.com/search?q='+search_term+'&l='+location_term+'%2C+NE'
         result = requests.get(url)
         soup = BeautifulSoup(result.content, 'html.parser')
-        url = 'https://www.google.com/search?q='++search_term+'&rlz=1C1VDKB_enUS938US938&oq=google+j&aqs=chrome.1.69i57j0i131i433i512j0i433i512j0i512l2j69i60l3.4648j0j7&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwjHp7nU9dz3AhW - jYkEHaTJCnkQutcGKAF6BAgPEAY & sxsrf = ALiCzsbm4jNvYteKcsFsiric0JS - ecS5Pg:1652460121647  # fpstate=tldetail&htivrt=jobs&htichips=city:7fwMtciNk4cEtjeuT01CRg%3D%3D&htischips=city;7fwMtciNk4cEtjeuT01CRg%3D%3D:'+location_term+'_comma_%20NE&htidocid=f2bfksgiRnsAAAAAAAAAAA%3D%3D'
-        # linkjobCard = soup.find_all('div', class_='base-search-card__info')
+        #simplyjobCard = soup.find_all('div', class_='tl-item-selected')
         for i in range(0, 3):
-            linkjobName = soup.find_all('h3', class_='base-search-card__title')[i].text.rstrip().lstrip()
-            linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
-            linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[
-                i].get_text().rstrip().lstrip()
-            # linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
-            if 'new' in linkjobName:
-                linkjobName = linkjobName.lstrip('new')
-                self.listWidget.addItem(linkjobName)
-            elif '*' in linkjobName:
-                linkjobName = linkjobName.rstrip()
-                self.listWidget.addItem(linkjobName)
+            simplyjobName = soup.find_all('h3', class_='jobposting-title')[i].text
+            simplycompanyName = soup.find_all('span', class_='JobPosting-labelWithIcon jobposting-company')[i].get_text()
+            simplycompanyLocation = soup.find_all('span', class_='jobposting-location')[i].get_text()
+            simplysalary = soup.find_all('div', class_='jobposting-salary SerpJob-salary')[i].get_text()
+            if 'new' in simplyjobName:
+                simplyjobName = simplyjobName.lstrip('new')
+                self.listWidget.addItem(simplyjobName)
+            elif '*' in simplyjobName:
+                simplyjobName = simplyjobName.rstrip()
+                self.listWidget.addItem(simplyjobName)
             else:
-                self.listWidget.addItem(linkjobName)
-            self.listWidget.addItem(linkcompanyName)
-            self.listWidget.addItem(linkcompanyLocation)
-            # if linksalary.isalpha():
-            # self.listWidget.addItem(linksalary)
-            # else:
-            # continue
+                self.listWidget.addItem(simplyjobName)
+            self.listWidget.addItem(simplycompanyName)
+            self.listWidget.addItem(simplycompanyLocation)
+            self.listWidget.addItem(simplysalary)
             i += 1
-        # print(linkjobCard[1].prettify())
+        #print(googjobCard[1].prettify())
 
     """def ziprecruiter(self):
         i = 0
