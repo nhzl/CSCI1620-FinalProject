@@ -18,7 +18,7 @@ class Controller(QMainWindow, Ui_JobSearch):
             self.indeed(a, b)
         if self.siteLinkedin.isChecked():
             self.linkedin(a, b)
-        if self.siteGoogle.isChecked():
+        if self.siteSimply.isChecked():
             self.simply(a, b)
 
     def indeed(self, a, b):
@@ -89,5 +89,9 @@ class Controller(QMainWindow, Ui_JobSearch):
 
 
     def reset(self):
-        x = '6'
-        self.searchBox.
+        self.searchBox.clear()
+        self.searchBox_2.clear()
+        self.listWidget.clear()
+        self.siteIndeed.setChecked(False)
+        self.siteLinkedin.setChecked(False)
+        self.siteSimply.setChecked(False)

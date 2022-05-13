@@ -43,7 +43,7 @@
      <string notr="true">background-color:rgb(255, 255, 255)</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="siteGoogle">
+   <widget class="QCheckBox" name="siteSimply">
     <property name="geometry">
      <rect>
       <x>450</x>
