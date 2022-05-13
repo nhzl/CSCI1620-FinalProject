@@ -87,31 +87,7 @@ class Controller(QMainWindow, Ui_JobSearch):
             i += 1
         # print(googjobCard[1].prettify())
 
-    """def ziprecruiter(self):
-        i = 0
-        search_term = self.searchBox.toPlainText()
-        location_term = self.searchBox_2.toPlainText()
-        url = 'https://www.ziprecruiter.com/candidate/search?form=jobs-landing&search=' + search_term + '&location=' + location_term
-        result = requests.get(url)
-
-        soup = BeautifulSoup(result.content, 'html.parser')
-
-        #zipjobCard = soup.find_all('div', class_='job_content')
-        for i in range(0, 3):
-            zipjobName = soup.find_all('h2')[i].get_text()
-            #linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
-            #linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[i].get_text().rstrip().lstrip()
-            #linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
-            self.listWidget.addItem(zipjobName)
-            #self.listWidget.addItem(linkcompanyName)
-            #self.listWidget.addItem(linkcompanyLocation)
-            #if linksalary.isalpha():
-            #self.listWidget.addItem(linksalary)
-            #else:
-            #continue
-            i += 1
-        #print(zipjobCard[1].prettify())"""
 
     def reset(self):
         x = '6'
-        self.listWidget.addItem(x)
+        self.searchBox.
