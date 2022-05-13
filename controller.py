@@ -19,6 +19,9 @@ class Controller(QMainWindow, Ui_MainWindow):
             self.indeed()
         if self.siteLinkedin.isChecked():
             self.linkedin()
+        if self.siteZiprecruiter.isChecked():
+            self.ziprecruiter()
+
 
 
 
@@ -31,7 +34,7 @@ class Controller(QMainWindow, Ui_MainWindow):
 
         soup = BeautifulSoup(result.content, 'html.parser')
 
-        jobCard = soup.find_all('div', class_='slider_item')
+        #jobCard = soup.find_all('div', class_='slider_item')
         for i in range(0,3):
             jobName = soup.find_all('h2')[i].get_text()
             companyName = soup.find_all('span',class_= 'companyName')[i].get_text()
@@ -50,21 +53,7 @@ class Controller(QMainWindow, Ui_MainWindow):
             self.listWidget.addItem(salary)
             i+=1
 
-
-
-        #job_title = job.find('span', attrs={'title'})
-
-        #employer_name = job.find(text ='companyName')
-
-        #location = job.find(text ='companyLocation')
-
-        print(jobCard[1].prettify())
-
-
-
-
-
-        #self.listWidget.addItem()"""
+        #print(jobCard[1].prettify())
 
     def linkedin(self):
         i = 0
@@ -75,7 +64,7 @@ class Controller(QMainWindow, Ui_MainWindow):
 
         soup = BeautifulSoup(result.content, 'html.parser')
 
-        linkjobCard = soup.find_all('div', class_='base-search-card__info')
+        #linkjobCard = soup.find_all('div', class_='base-search-card__info')
         for i in range(0,3):
             linkjobName = soup.find_all('h3',class_='base-search-card__title')[i].text.rstrip().lstrip()
             linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
@@ -96,12 +85,41 @@ class Controller(QMainWindow, Ui_MainWindow):
             #else:
                 #continue
             i += 1
-        print(linkjobCard[1].prettify())
+        #print(linkjobCard[1].prettify())
 
-    #def google(self):
+        #def google(self):
         #url = 'https://www.google.com/search?q=' + search_term + '&rlz=1C1CHBF_en&oq=google+job+s&aqs=chrome.1.69i57j0i433i512j0i512l5j0i10i512j0i512l2&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&sqi=2&ved=2ahUKEwjs1ZLLptH3AhWchP0HHcjsCNgQutcGKAF6BAggEAY&sxsrf=ALiCzsYk8LG6xYJPn7SALKDVStz4i5QVQg:1652060938618#fpstate=tldetail&htivrt=jobs&htichips=city:8WYPEnHkrIl-8kaKidp64Q%3D%3D&htischips=city;8WYPEnHkrIl-8kaKidp64Q%3D%3D:' + location_term +'&htidocid=LQQoNIk0r3cAAAAAAAAAAA%3D%3D'
-    #def ziprecruiter(self):
-        #url = 'https://www.ziprecruiter.com/jobs-search?search=' search_term + '&location=' + location_term
+    def ziprecruiter(self):
+        i = 0
+        search_term = self.searchBox.toPlainText()
+        location_term = self.searchBox_2.toPlainText()
+        url = 'https://www.ziprecruiter.com/candidate/search?form=jobs-landing&search=' + search_term + '&location=' + location_term
+        result = requests.get(url)
+
+        soup = BeautifulSoup(result.content, 'html.parser')
+
+        zipjobCard = soup.find_all('div', class_='job_content')
+        for i in range(0, 3):
+            zipjobName = soup.find_all('span', class_='just_job_title')[i].get_text()
+            #linkcompanyName = soup.find_all('h4', class_='base-search-card__subtitle')[i].text.rstrip().lstrip()
+            #linkcompanyLocation = soup.find_all('span', class_='job-search-card__location')[i].get_text().rstrip().lstrip()
+            #linksalary = soup.find_all('span', class_='job-search-card__salary-info')[i].get_text()
+            if 'new' in zipjobName:
+                zipjobName = zipjobName.lstrip('new')
+                self.listWidget.addItem(zipjobName)
+            elif '*' in zipjobName:
+                zipjobName = zipjobName.rstrip()
+                self.listWidget.addItem(zipjobName)
+            else:
+                self.listWidget.addItem(zipjobName)
+            #self.listWidget.addItem(linkcompanyName)
+            #self.listWidget.addItem(linkcompanyLocation)
+            #if linksalary.isalpha():
+            #self.listWidget.addItem(linksalary)
+            #else:
+            #continue
+            i += 1
+        print(zipjobCard[1].prettify())
 
 
 

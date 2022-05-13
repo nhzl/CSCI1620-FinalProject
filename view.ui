@@ -66,17 +66,17 @@
      <string>Contract</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="siteGlassdoor">
+   <widget class="QCheckBox" name="siteZiprecruiter">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>150</x>
       <y>250</y>
-      <width>86</width>
-      <height>17</height>
+      <width>91</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>GlassDoor</string>
+     <string>ZipRecruiter</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="searchBox_2">
