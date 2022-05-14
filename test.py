@@ -1,11 +1,13 @@
 import unittest
-
+from controller import*
 
 class MyTestCase(unittest.TestCase):
-    def reset_button(self):
-        self.assertEqual(True, False)  # add assertion here
-    def search_button(self):
-        self.assertEqual()
+    def search(self):
+        with self.assertRaises(TypeError):
+            search(a.isalpha(),False)
+
+        with self.assertRaises(TypeError):
+            search(b.isalpha(),False)
 
 
 if __name__ == '__main__':
